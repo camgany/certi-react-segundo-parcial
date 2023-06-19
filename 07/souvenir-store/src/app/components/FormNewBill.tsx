@@ -1,22 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem, Select, InputLabel, FormControl
+} from '@mui/material';
 
-const styles = {
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '300px',
-    margin: '0 auto',
-  },
-  input: {
-    marginBottom: '16px',
-  },
-  submitButton: {
-    alignSelf: 'flex-end',
-  },
-};
 
 const FormNewBill = () => {
   const descriptionRef = useRef(null);
@@ -63,36 +50,49 @@ const FormNewBill = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h1 style={{ textAlign: 'center' }}>Añadir Gasto</h1>
       <TextField
         label="Descripción"
         inputRef={descriptionRef}
         fullWidth
+        sx={{ marginBottom: '16px' }}
       />
       <TextField
         label="Cantidad"
         type="number"
         inputRef={amountRef}
         fullWidth
+        sx={{ marginBottom: '16px' }}
       />
-      <Select
-        label="Categoría"
-        inputRef={categoryRef}
-        fullWidth
-      >
-        <MenuItem value="ahorro">Ahorro</MenuItem>
-        <MenuItem value="comida">Comida</MenuItem>
-        <MenuItem value="casa">Casa</MenuItem>
-        <MenuItem value="gastos">Gastos</MenuItem>
-        <MenuItem value="ocio">Ocio</MenuItem>
-        <MenuItem value="salud">Salud</MenuItem>
-        <MenuItem value="suscripciones">Suscripciones</MenuItem>
-      </Select>
-      <TextField
-        label="Fecha"
-        type="date"
-        inputRef={dateRef}
-        fullWidth
-      />
+     <FormControl fullWidth sx={{ marginBottom: '16px' }}>
+  <InputLabel id="category-label">Categoría</InputLabel>
+  <Select
+    inputRef={categoryRef}
+    labelId="category-label"
+    fullWidth
+  >
+    <MenuItem value="ahorro">Ahorro</MenuItem>
+    <MenuItem value="comida">Comida</MenuItem>
+    <MenuItem value="casa">Casa</MenuItem>
+    <MenuItem value="gastos">Gastos</MenuItem>
+    <MenuItem value="ocio">Ocio</MenuItem>
+    <MenuItem value="salud">Salud</MenuItem>
+    <MenuItem value="suscripciones">Suscripciones</MenuItem>
+  </Select>
+</FormControl>
+
+
+<TextField
+  label="Fecha"
+  type="date"
+  inputRef={dateRef}
+  fullWidth
+  InputLabelProps={{
+    shrink: true,
+  }}
+  sx={{ marginBottom: '16px' }}
+/>
+
       <Button type="submit" variant="contained" fullWidth>
         Enviar
       </Button>

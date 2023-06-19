@@ -65,7 +65,8 @@ export default function TemporaryDrawer() {
       </Drawer>
       <main>
         <Grid sx={{ m: 10 }} xs={12} md={12} lg={12}>
-          <ExpenseStats expenses={expenses} />
+        <ExpenseStats expenses={expenses} />
+
         </Grid>
       </main>
     </div>

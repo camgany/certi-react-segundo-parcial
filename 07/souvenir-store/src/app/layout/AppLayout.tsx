@@ -11,7 +11,10 @@ import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
 import CardBill from '../components/CardBill';
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 const listMenu = [
   { name: 'Inicio', icon: <HomeWorkIcon />, to: '/' },
@@ -43,11 +46,10 @@ export default function TemporaryDrawer() {
   }, []);
 
   // Calcular el total de los gastos y la cantidad de gastos utilizando useMemo
-const [totalExpenses, totalExpensesCount] = useMemo(() => {
-  const total = expenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-  return [total, expenses.length];
-}, [expenses]);
-
+  const [totalExpenses, totalExpensesCount] = useMemo(() => {
+    const total = expenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
+    return [total, expenses.length];
+  }, [expenses]);
 
   return (
     <div>
@@ -72,9 +74,30 @@ const [totalExpenses, totalExpensesCount] = useMemo(() => {
         </Box>
       </Drawer>
       <main>
-        <Grid sx={{ m: 10 }} xs={12} md={12} lg={12}>
-          <h2>Total de gastado: {totalExpenses} Bs</h2>
-          <h2>Cantidad de gastos: {totalExpensesCount}</h2>
+        <h1 style={{ textAlign: 'center' }}
+        >Lista de gastos</h1>
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Card sx={{ backgroundColor: 'primary.main' }}>
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  Total gastado: {totalExpenses} Bs
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card sx={{ backgroundColor: 'primary.main' }}>
+              <CardContent>
+                <Typography variant="h6" component="div">
+                  Cantidad de gastos: {totalExpensesCount}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1} sx={{ margin: '5px' }}>
           {expenses.map((bill, index) => (
             <CardBill key={index} bill={bill} />
           ))}

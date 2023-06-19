@@ -34,13 +34,13 @@ const CardBill = ({ bill }) => {
   }, [bill.category]);
 
   return (
-    <Grid item>
-      <Card sx={{ mb: 2 }}>
+    <Grid item xs={12} sm={6} md={4}>
+      <Card sx={{ mb: 2 }} variant="outlined" elevation={2} sx={{ backgroundColor: '#f1e4e8' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <CardContent>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ marginRight: '16px' }}>
+                <div style={{ marginRight: '5px' }}>
                   {getIconByCategory}
                 </div>
                 <div>
