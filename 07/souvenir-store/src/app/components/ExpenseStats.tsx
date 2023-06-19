@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Bar } from 'react-chartjs-2';
 
 const ExpenseStats = ({ expenses }) => {
   const categories = [...new Set(expenses.map((expense) => expense.category))];
@@ -9,7 +9,7 @@ const ExpenseStats = ({ expenses }) => {
     return { category, total };
   });
 
-  const chartData = {
+  const chartDataByCategory = {
     labels: expensesByCategory.map((item) => item.category),
     datasets: [
       {
@@ -27,10 +27,27 @@ const ExpenseStats = ({ expenses }) => {
     ],
   };
 
+  const chartDataByDate = {
+    labels: expenses.map((expense) => expense.date),
+    datasets: [
+      {
+        label: 'Gastos por fecha',
+        data: expenses.map((expense) => expense.amount),
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+      },
+    ],
+  };
+
   return (
     <div>
-      <h2>Gastos por categoría</h2>
-      <Pie data={chartData} />
+      <div>
+        <h2>Gastos por categoría</h2>
+        <Pie data={chartDataByCategory} />
+      </div>
+      <div>
+        <h2>Gastos por fecha</h2>
+        <Bar data={chartDataByDate} />
+      </div>
     </div>
   );
 };

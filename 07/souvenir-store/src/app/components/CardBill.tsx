@@ -2,40 +2,40 @@ import React, { useMemo, memo } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import MoneyIcon from '../../assets/icono_ahorro.svg';
-import FastfoodIcon from '../../assets/icono_comida.svg';
-import HomeIcon from '../../assets/icono_casa.svg';
-import ShoppingBagIcon from '../../assets/icono_gastos.svg';
-import SportsEsportsIcon from '../../assets/icono_ocio.svg';
-import LocalHospitalIcon from '../../assets/icono_salud.svg';
-import ReceiptIcon from '../../assets/icono_suscripciones.svg';
+import MoneyIcon from '@mui/icons-material/Money';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
+import HomeIcon from '@mui/icons-material/Home';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import Grid from '@mui/material/Grid';
 
 const CardBill = ({ bill }) => {
   const getIconByCategory = useMemo(() => {
     switch (bill.category) {
       case 'ahorro':
-        return <img src={MoneyIcon} alt="Money Icon" />;
+        return <MoneyIcon />;
       case 'comida':
-        return <img src={FastfoodIcon} alt="Fastfood Icon" />;
+        return <FastfoodIcon />;
       case 'casa':
-        return <img src={HomeIcon} alt="Home Icon" />;
+        return <HomeIcon />;
       case 'gastos':
-        return <img src={ShoppingBagIcon} alt="Shopping Bag Icon" />;
+        return <ShoppingBagIcon />;
       case 'ocio':
-        return <img src={SportsEsportsIcon} alt="Sports Icon" />;
+        return <SportsEsportsIcon />;
       case 'salud':
-        return <img src={LocalHospitalIcon} alt="Health Icon" />;
+        return <LocalHospitalIcon />;
       case 'suscripciones':
-        return <img src={ReceiptIcon} alt="Receipt Icon" />;
+        return <ReceiptIcon />;
       default:
         return null;
     }
   }, [bill.category]);
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-      <Card sx={{ maxWidth: 300, mb: 2 }}>
+    <Grid item>
+      <Card sx={{ mb: 2 }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <CardContent>
