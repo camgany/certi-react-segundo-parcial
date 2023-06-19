@@ -4,6 +4,7 @@ import { SouvenirPage } from "../pages/SouvenirPage";
 import { GuardedRoute } from "../../guards/GuaardedRoute";
 import { useStore } from "../../context/ContextProvider";
 import { ItemPage } from "../pages/ItemPage";
+import { ChartStats } from "../pages/ChartStats";
 
 export const AppRoutes = () => {
   const { auth } = useStore();
@@ -22,6 +23,14 @@ export const AppRoutes = () => {
         element={
           <GuardedRoute auth={auth}>
             <ItemPage />
+          </GuardedRoute>
+        }
+      />
+      <Route
+        path="/charts"
+        element={
+          <GuardedRoute auth={auth}>
+            <ChartStats />
           </GuardedRoute>
         }
       />

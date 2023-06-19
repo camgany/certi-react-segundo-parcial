@@ -1,4 +1,4 @@
-import TemporaryDrawer from "../layout/appLayout";
+import TemporaryDrawer from "../layout/ItemLayout";
 
 export const ItemPage = () => {
   return <TemporaryDrawer />;

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -10,7 +10,7 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import NavBar from './NavBar';
 import { useNavigate } from 'react-router-dom';
-import CardBill from '../components/CardBill';
+import ExpenseStats from './../components/ExpenseStats';
 import { Grid } from '@mui/material';
 
 const listMenu = [
@@ -20,7 +20,7 @@ const listMenu = [
 ];
 
 export default function TemporaryDrawer() {
-  const [toggle, setToggle] = React.useState(false);
+  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
   const goTo = (url) => {
@@ -34,25 +34,17 @@ export default function TemporaryDrawer() {
     setToggle(open);
   };
 
-  // Obtener los gastos del Local Storage
-  const [expenses, setExpenses] = React.useState([]);
+  const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
     const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
     setExpenses(storedExpenses);
   }, []);
 
-  // Calcular el total de los gastos y la cantidad de gastos utilizando useMemo
-const [totalExpenses, totalExpensesCount] = useMemo(() => {
-  const total = expenses.reduce((acc, expense) => acc + parseFloat(expense.amount), 0);
-  return [total, expenses.length];
-}, [expenses]);
-
-
   return (
     <div>
       <NavBar toggle={toggleDrawer} />
-      <Drawer anchor="left" open={toggle} onClose={toggleDrawer(false)}>
+      <Drawer anchor={'left'} open={toggle} onClose={toggleDrawer(false)}>
         <Box
           sx={{ width: 250 }}
           role="presentation"
@@ -73,11 +65,7 @@ const [totalExpenses, totalExpensesCount] = useMemo(() => {
       </Drawer>
       <main>
         <Grid sx={{ m: 10 }} xs={12} md={12} lg={12}>
-          <h2>Total de gastado: {totalExpenses} Bs</h2>
-          <h2>Cantidad de gastos: {totalExpensesCount}</h2>
-          {expenses.map((bill, index) => (
-            <CardBill key={index} bill={bill} />
-          ))}
+          <ExpenseStats expenses={expenses} />
         </Grid>
       </main>
     </div>
